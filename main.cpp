@@ -7,7 +7,6 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-
 int random(int min, int max) {
     static bool first = true;
     if (first) {
@@ -23,10 +22,17 @@ void randomSleepTime() {
     sleep(sleepTime);
 }
 
-int counting() {
+int fibonacci(int n) {
+   if (n <=1)
+       return n;
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
+void counting() {
     cout << "Calculating..." << endl;
-    int a = 2;
-    return a + a * a;
+    int randElement = random(4,20);
+    int result =  fibonacci(randElement);
+    cout<<"Fibonacci sequence "<<randElement<<"-th element is: "<<result<<endl;
 }
 
 void *threadFunction(void *arg) {
@@ -41,8 +47,7 @@ void *threadFunction(void *arg) {
 void createThreads(int n) {
     for (int i = 0; i < n; ++i) {
         pthread_t newThread;
-        cout << "Creating Thread " << i+1 << endl;
-
+        cout << "Creating Thread " << i + 1 << endl;
         pthread_create(&newThread, nullptr, threadFunction, nullptr);
         pthread_join(newThread, nullptr);
     }
