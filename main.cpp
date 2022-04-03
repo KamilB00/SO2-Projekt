@@ -48,15 +48,14 @@ void createThreads(int numberOfThreads) {
     }
 }
 
-int numberOfThreads() {
-    int number_of_threads;
-    printf("How many threads would you like to create: ");
-    scanf("%d", &number_of_threads);
-    return number_of_threads;
-}
-
-int main() {
-    createThreads(numberOfThreads());
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Wrong number of given arguments!\n");
+        exit(1);
+    }
+    int numberOfThreads;
+    numberOfThreads = atoi(argv[1]);
+    createThreads(numberOfThreads);
     return 0;
 }
 
